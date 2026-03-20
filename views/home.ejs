@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Data | Main Node</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  
+  <%- include('partials/navbar', { activePage: 'home' }) %>
+
+  <div class="dashboard-wrapper">
+    <div class="hud-container slide-in">
+      <div class="hud-header">
+        <span class="hud-blinker"></span>
+        <span class="hud-title">SYSTEM.INITIALIZING</span>
+      </div>
+      
+      <div class="hud-content">
+        <h1 class="glitch-text" data-text="<%= message %>"><%= message %></h1>
+        <p class="cyber-subtitle">> Establishing secure connection to student database array...</p>
+
+        <div class="tech-grid">
+          <div class="tech-card">
+            <div class="tech-icon">GET</div>
+            <div class="tech-label">/about</div>
+            <div class="tech-desc">Fetch John Doe Data</div>
+            <a href="/about" class="cyber-btn mt-2">EXECUTE →</a>
+          </div>
+          <div class="tech-card">
+            <div class="tech-icon">GET</div>
+            <div class="tech-label">/contact</div>
+            <div class="tech-desc">Fetch Comms Info</div>
+            <a href="/contact" class="cyber-btn mt-2">EXECUTE →</a>
+          </div>
+        </div>
+
+        <div class="api-tester-panel mt-4">
+          <h3 class="panel-title">> API TEST PORTAL</h3>
+          <p class="panel-desc">Access the fully-featured HTML forms for POST and PUT.</p>
+          <div class="api-actions">
+            <a href="/register" class="cyber-btn primary" style="text-decoration: none; text-align: center;">POST /register</a>
+            <a href="/update" class="cyber-btn variant" style="text-decoration: none; text-align: center;">PUT /update</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts handled by individual form pages -->
+</body>
+</html>

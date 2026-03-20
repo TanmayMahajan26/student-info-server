@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Data | Update</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  
+  <%- include('partials/navbar', { activePage: 'update' }) %>
+
+  <div class="dashboard-wrapper">
+    <div class="hud-container slide-in">
+      <div class="hud-header">
+        <span class="hud-blinker"></span>
+        <span class="hud-title">SYSTEM.UPDATE_NODE</span>
+      </div>
+      
+      <div class="hud-content">
+        <h1 class="glitch-text" data-text="UPDATE TARGET">UPDATE TARGET</h1>
+        <p class="cyber-subtitle">> Submitting PUT request to override database segment.</p>
+
+        <form id="updateForm" class="cyber-form mt-4">
+          <div class="tech-card" style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; max-width: 400px; padding: 2rem;">
+            
+            <div style="width: 100%;">
+              <label class="tech-label" style="display: block; margin-bottom: 0.5rem; color: #ff5555;">TARGET ROLL NUMBER</label>
+              <input type="text" id="updateRoll" name="roll" class="cyber-btn" style="width: 100%; border: 1px solid #ff5555; outline: none; background: rgba(20,0,0,0.8); color: #ff5555;" required />
+            </div>
+
+            <div style="width: 100%;">
+              <label class="tech-label" style="display: block; margin-bottom: 0.5rem; color: #ff5555;">NEW STUDENT NAME</label>
+              <input type="text" id="updateName" name="name" class="cyber-btn" style="width: 100%; border: 1px solid #ff5555; outline: none; background: rgba(20,0,0,0.8); color: #ff5555;" required />
+            </div>
+
+            <div style="width: 100%;">
+              <label class="tech-label" style="display: block; margin-bottom: 0.5rem; color: #ff5555;">NEW BRANCH</label>
+              <select id="updateBranch" name="branch" class="cyber-btn" style="width: 100%; border: 1px solid #ff5555; outline: none; background: rgba(20,0,0,0.8); color: #ff5555;" required>
+                <option value="Computer Engineering">Computer Engineering</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Electronics & Computer Science">Electronics & Computer Science</option>
+                <option value="AI & Data Science">AI & Data Science</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+              </select>
+            </div>
+
+            <div style="width: 100%;">
+              <label class="tech-label" style="display: block; margin-bottom: 0.5rem; color: #ff5555;">NEW YEAR</label>
+              <select id="updateYear" name="year" class="cyber-btn" style="width: 100%; border: 1px solid #ff5555; outline: none; background: rgba(20,0,0,0.8); color: #ff5555;" required>
+                <option value="First Year (FE)">First Year (FE)</option>
+                <option value="Second Year (SE)">Second Year (SE)</option>
+                <option value="Third Year (TE)">Third Year (TE)</option>
+                <option value="Final Year (BE)">Final Year (BE)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="cyber-btn variant mt-2" style="width: 100%; justify-content: center; border-color: #ff5555; color: #ff5555;">EXECUTE OVERRIDE (PUT)</button>
+          </div>
+        </form>
+
+        <div class="students-list mt-4" style="max-width: 400px; padding: 1rem; border: 1px solid #55ffff; background: rgba(0,20,20,0.5);">
+          <h3 class="cyber-subtitle" style="color: #55ffff; margin-bottom: 1rem;">> REGISTERED DATABANKS</h3>
+          <% if (Object.keys(students).length === 0) { %>
+            <p style="color: #ff5555;">[DATABASE EMPTY - PLEASE REGISTER ENTITIES FIRST]</p>
+          <% } else { %>
+            <% Object.values(students).forEach(s => { %>
+              <div style="margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px dashed #55ffff; color: #fff;">
+                <strong style="color: #ffeb3b;">ROLL:</strong> <%= s.roll %> | 
+                <strong style="color: #11ff11;">NAME:</strong> <%= s.name %> <br/>
+                <strong style="color: #11ff11;">BRANCH:</strong> <%= s.branch %> | 
+                <strong style="color: #ffeb3b;">COURSE/YEAR:</strong> <span style="color: #ff5555"><%= s.course || s.year %></span>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+
+        <div id="statusOutput" class="terminal-output mt-4" style="display: none; max-width: 400px;"></div>
+
+        <div style="margin-top: 2rem;">
+          <a href="/" class="cyber-btn mt-4">← RETURN TO CORE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('updateForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const output = document.getElementById('statusOutput');
+      output.style.display = 'block';
+      output.innerHTML = '> Awaiting override sequence...<span class="hud-blinker inline"></span>';
+
+      const roll = document.getElementById('updateRoll').value;
+      const name = document.getElementById('updateName').value;
+      const branch = document.getElementById('updateBranch').value;
+      const year = document.getElementById('updateYear').value;
+      
+      // Build form data
+      const body = new URLSearchParams({ roll, name, branch, year });
+      
+      try {
+        const response = await fetch('/update', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body
+        });
+        const text = await response.text();
+        output.innerHTML = `> [STATUS: ${response.status}]<br/>> RETURN: ${text}`;
+      } catch (err) {
+        output.innerHTML = `> ERROR: Connection failed.`;
+      }
+    });
+  </script>
+</body>
+</html>

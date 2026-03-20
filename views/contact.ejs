@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Data | Contact</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  
+  <%- include('partials/navbar', { activePage: 'contact' }) %>
+
+  <div class="dashboard-wrapper">
+    <div class="hud-container slide-in">
+      <div class="hud-header">
+        <span class="hud-blinker"></span>
+        <span class="hud-title">NODE.COMMS: /contact</span>
+      </div>
+      
+      <div class="hud-content">
+        <h2 class="panel-title">> COMMUNICATION LINK ESTABLISHED</h2>
+        
+        <div class="data-pad">
+          <div class="data-row">
+            <span class="data-label">EMAIL DIRECTIVE</span>
+            <span class="data-value tech-text"><%= email %></span>
+          </div>
+          <div class="data-row">
+            <span class="data-label">STATUS</span>
+            <span class="data-value highlight-secondary">ONLINE</span>
+          </div>
+        </div>
+
+        <a href="/" class="cyber-btn mt-4">← RETURN TO CORE</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

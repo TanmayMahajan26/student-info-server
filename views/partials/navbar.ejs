@@ -1,0 +1,11 @@
+<nav class="cyber-nav">
+  <div class="nav-brand">
+    <span class="brand-icon">⚡</span>
+    <span class="brand-text">STUDENT_DB<span class="blink">_</span></span>
+  </div>
+  <div class="nav-links">
+    <a href="/" class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'home' ? 'active' : '' %>">CORE</a>
+    <a href="/about" class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'about' ? 'active' : '' %>">ABOUT</a>
+    <a href="/contact" class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'contact' ? 'active' : '' %>">COMMS</a>
+  </div>
+</nav>
