@@ -331,5 +331,44 @@ h1, h2, h3, .hud-title, .brand-text {
 
 @keyframes slideFade {
   0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .cyber-nav {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .dashboard-wrapper {
+    padding: 2rem 1rem;
+  }
+  
+  .hud-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .glitch-text {
+    font-size: 1.5rem;
+  }
+  
+  .tech-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .data-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .api-actions {
+    flex-direction: column;
+  }
 }
